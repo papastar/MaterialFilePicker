@@ -1,12 +1,9 @@
 package com.nbsp.materialfilepicker.ui;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +21,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Created by Dimorinny on 24.10.15.
@@ -139,7 +140,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
     }
 
     private void initFragment() {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, DirectoryFragment.getInstance(
                         mCurrentPath, mFilter))
                 .addToBackStack(null)
@@ -174,7 +175,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
     }
 
     private void addFragmentToBackStack(String path) {
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, DirectoryFragment.getInstance(
                         path, mFilter))
                 .addToBackStack(null)
@@ -200,7 +201,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
 
         if (!mCurrentPath.equals(mStartPath)) {
             fm.popBackStack();
@@ -234,8 +235,9 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
             mCurrentPath = clickedFile.getPath();
             // If the user wanna go to the emulated directory, he will be taken to the
             // corresponding user emulated folder.
-            if (mCurrentPath.equals("/storage/emulated"))
+            if (mCurrentPath.equals("/storage/emulated")) {
                 mCurrentPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            }
             addFragmentToBackStack(mCurrentPath);
             updateTitle();
         } else {

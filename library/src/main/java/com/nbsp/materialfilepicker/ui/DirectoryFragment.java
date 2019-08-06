@@ -1,10 +1,7 @@
 package com.nbsp.materialfilepicker.ui;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +12,10 @@ import com.nbsp.materialfilepicker.utils.FileUtils;
 import com.nbsp.materialfilepicker.widget.EmptyRecyclerView;
 
 import java.io.File;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  * Created by Dimorinny on 24.10.15.
